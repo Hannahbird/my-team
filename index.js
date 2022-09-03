@@ -50,7 +50,7 @@ const promptManager = () => {
       },
       {
         type: "input",
-        name: "officeNum",
+        name: "number",
         message: "Manager's office number? ",
         validate: (input) => {
           if (input) {
@@ -68,7 +68,7 @@ const promptManager = () => {
       },
     ])
     .then((data) => {
-      let manager = new Manager(data.name, data.email, data.id, data.officeNum);
+      let manager = new Manager(data.name, data.email, data.id, data.number);
       employeesArr.push(manager);
     });
 };
