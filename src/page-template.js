@@ -20,7 +20,7 @@ const generateEmployeeItems = (employeesArr) => {
     if (employeesArr[i].getRole() === "Manager") {
       // sets icon of employeeType
       icon = `<i class="bi bi-cup-hot-fill"></i`;
-    } else if (employeesArr[i].getRole() === "Assitant") {
+    } else if (employeesArr[i].getRole() === "Intern") {
       icon = `<i class="bi bi-search"></i>`;
     } else {
       icon = `<i class="bi bi-book-half"></i>`;

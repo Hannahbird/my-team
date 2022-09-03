@@ -1,7 +1,7 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 const Manager = require("./lib/manager");
-const Intern = require("./lib/Assistant");
+const Intern = require("./lib/intern");
 const Engineer = require("./lib/engineer");
 
 // import function that contructs my HTML
@@ -81,7 +81,7 @@ const promptEmployee = (employeesArr) => {
         type: "list",
         name: "employeeType",
         message: "Employee's role? ",
-        choices: ["Engineer", "Assistant"],
+        choices: ["Engineer", "Intern"],
       },
       {
         type: "input",
@@ -122,9 +122,9 @@ const promptEmployee = (employeesArr) => {
       {
         type: "input",
         name: "school",
-        message: "What school does the Assistant attend? ",
+        message: "What school does the Intern attend? ",
         when: ({ employeeType }) => {
-          if (employeeType === "Assistant") {
+          if (employeeType === "Intern") {
             return true;
           }
         },
@@ -173,13 +173,8 @@ const promptEmployee = (employeesArr) => {
         );
         employeesArr.push(engineer);
       } else {
-        let Assistant = new Assistant(
-          data.name,
-          data.email,
-          data.id,
-          data.school
-        );
-        employeesArr.push(Assistant);
+        let Intern = new Intern(data.name, data.email, data.id, data.school);
+        employeesArr.push(Intern);
       }
 
       console.log(employeesArr);
