@@ -1,8 +1,8 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 const Manager = require("./lib/manager");
-// const Intern = require("./lib/Assistant");
-// const Engineer = require("./lib/engineer");
+const Intern = require("./lib/Assistant");
+const Engineer = require("./lib/engineer");
 
 // import function that contructs my HTML
 const generateHTML = require("./src/page-template");
