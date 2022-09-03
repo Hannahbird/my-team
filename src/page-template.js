@@ -1,3 +1,6 @@
+const Manager = require("../lib/manager");
+const Intern = require("../lib/intern");
+const Engineer = require("../lib/engineer");
 // filter function for specific employes
 const filterCardInfo = (employeeArr, i) => {
   // function will return info for the different types of employees
