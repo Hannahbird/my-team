@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Hannahbird/my-team/issues"
   },
-  "homepage": "https://github.com/Hannahbird/my-team#readme"
+  "homepage": "https://github.com/Hannahbird/my-team#readme",
+  "dependencies": {
+    "inquirer": "^8.2.4"
+  }
 }
