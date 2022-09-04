@@ -1,7 +1,6 @@
 const inquirer = require("inquirer");
-const fs = require("fs");
 const Manager = require("./lib/manager");
-const Intern = require("./lib/intern");
+const intern = require("./lib/intern");
 const Engineer = require("./lib/engineer");
 
 // import function that contructs my HTML
@@ -10,7 +9,7 @@ const generateHTML = require("./src/page-template");
 let employeesArr = [];
 
 const promptManager = () => {
-  inquirer
+  return inquirer
     .prompt([
       {
         type: "input",
@@ -50,7 +49,7 @@ const promptManager = () => {
       },
       {
         type: "input",
-        name: "number",
+        name: "officeNumber",
         message: "Manager's office number? ",
         validate: (input) => {
           if (input) {
@@ -68,14 +67,24 @@ const promptManager = () => {
       },
     ])
     .then((data) => {
-      let manager = new Manager(data.name, data.email, data.id, data.number);
+      let manager = new Manager(
+        data.name,
+        data.email,
+        data.id,
+        data.officeNumber
+      );
       employeesArr.push(manager);
+      if (data.confirmMore) {
+        return promptEmployee(employeesArr);
+      } else {
+        return employeesArr;
+      }
     });
 };
 const promptEmployee = (employeesArr) => {
   //prompts for adding employees
 
-  inquirer
+  return inquirer
     .prompt([
       {
         type: "list",
@@ -174,7 +183,7 @@ const promptEmployee = (employeesArr) => {
         employeesArr.push(engineer);
       } else {
         let Intern = new Intern(data.name, data.email, data.id, data.school);
-        employeesArr.push(Intern);
+        employeesArr.push(intern);
       }
 
       console.log(employeesArr);
@@ -189,8 +198,12 @@ const promptEmployee = (employeesArr) => {
 };
 
 promptManager()
-  .then((employeesArr) => {
-    console.log(employeesArr);
-    return generateHTML(employeesArr);
+  .then(() => {
+    return generateHTML(JSON.stringify(employeesArr));
   })
-  .then((pageHTML) => {});
+  .then((pageHTML) => {
+    writeFile(pageHTML);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
