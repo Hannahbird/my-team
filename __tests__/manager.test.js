@@ -5,7 +5,7 @@ const Employee = require("../lib/employee");
 test("constructs manager object", () => {
   const manager = new Manager("Hannah", "1", "hey$", "123456");
 
-  expect(manager.number).toBe("123456");
+  expect(manager.officeNumber).toBe("123456");
 });
 
 // checks methods

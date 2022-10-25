@@ -1,7 +1,8 @@
 const inquirer = require("inquirer");
 const Manager = require("./lib/manager");
-const intern = require("./lib/intern");
+const Intern = require("./lib/intern");
 const Engineer = require("./lib/engineer");
+const fs = require('fs');
 
 // import function that contructs my HTML
 const generateHTML = require("./src/page-template");
@@ -182,7 +183,7 @@ const promptEmployee = (employeesArr) => {
         );
         employeesArr.push(engineer);
       } else {
-        let Intern = new Intern(data.name, data.email, data.id, data.school);
+        let intern = new Intern(data.name, data.email, data.id, data.school);
         employeesArr.push(intern);
       }
 
@@ -202,7 +203,16 @@ promptManager()
     return generateHTML(JSON.stringify(employeesArr));
   })
   .then((pageHTML) => {
-    writeFile(pageHTML);
+    fs.writeFile('./dist/index.html', pageHTML, err =>{
+      if(err){
+        throw new Error(err);
+      }
+    });
+    fs.copyFile('./src/style.css', './dist/style.css', err => {
+      if(err){
+        return;
+      }
+    })
   })
   .catch((err) => {
     console.log(err);
